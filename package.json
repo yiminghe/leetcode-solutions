@@ -1,4 +1,5 @@
 {
+  "private": true,
   "dependencies": {
     "performance-now": "^2.1.0"
   }
