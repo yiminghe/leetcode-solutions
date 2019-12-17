@@ -48,7 +48,59 @@ function getLevel(arr) {
   return level;
 }
 
+
+function getStackNode(n, state = 1) {
+  if (!n) {
+    return null;
+  }
+  return {
+    n,
+    state,
+  };
+}
+
+function traverse(root, order) {
+  if (!root) {
+    return [];
+  }
+  const stack = [getStackNode(root, 0)];
+  const ret = [];
+  let stackTop;
+  while (stack.length) {
+    if (!stackTop && stack.length) {
+      stackTop = stack.pop();
+      stackTop.state++;
+    }
+    if (stackTop) {
+      switch (stackTop.state) {
+        case 1:
+          if (order === 'pre') {
+            ret.push(stackTop.n.val);
+          }
+          stack.push(stackTop);
+          stackTop = getStackNode(stackTop.n.left);
+          break;
+        case 2:
+          if (order === 'in') {
+            ret.push(stackTop.n.val);
+          }
+          stack.push(stackTop);
+          stackTop = getStackNode(stackTop.n.right);
+          break;
+        case 3:
+          if (order === 'post') {
+            ret.push(stackTop.n.val);
+          }
+          stackTop = null;
+          break;
+      }
+    }
+  }
+  return ret;
+}
+
 const api = module.exports = {
+  traverse,
   createTree(arr) {
     arr.forEach((element, index) => {
       if (arr[index]) {
