@@ -99,6 +99,23 @@ function traverse(root, order) {
   return ret;
 }
 
+const aCharCode = 'a'.charCodeAt(0);
+
+function collecTrie(root , s,ans) {
+  if(root.isWord){
+    ans.push(s);
+  }
+  const {children}=root;
+  for(var i=0;i<26;i++){
+    const c=children[i];
+    if(c){
+        const ms=s+String.fromCharCode(i+aCharCode);
+        collecTrie(c,ms,ans);
+    }
+  }
+  return;
+}
+
 const api = module.exports = {
   traverse,
   createTree(arr) {
@@ -135,6 +152,13 @@ const api = module.exports = {
     }
     return arr[0];
   },
+
+  printTrie(root){
+    const ans=[];
+    collecTrie(root,'',ans);
+    console.log(ans);
+  },
+
   visualizeTree(arr) {
 
     const maxWidth = getMaxWidth(arr);
