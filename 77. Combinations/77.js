@@ -5,20 +5,39 @@
  */
 var combine = function (n, k) {
   const ans = [];
-  const tmp = new Array(k);
+  const tmp = [];
 
-  function dfs(start, index) {
-    if (index == k) {
+  function dfs(start) {
+    if (tmp.length === k) {
       ans.push(tmp.concat());
       return;
     }
     for (let i = start; i <= n; i++) {
-      tmp[index] = i;
-      dfs(i + 1, index + 1);
+      tmp.push(i);
+      dfs(i + 1);
+      tmp.pop();
     }
   }
 
-  dfs(1, 0);
+  function dfs2(start) {
+    if (tmp.length === k) {
+      ans.push(tmp.concat());
+      return;
+    }
+
+    if (start > n) {
+      return;
+    }
+
+    tmp.push(start);
+    dfs(start + 1);
+    tmp.pop();
+    dfs(start + 1);
+  }
+
+  dfs2(1);
+
+  // dfs(1);
 
   return ans;
 };
