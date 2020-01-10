@@ -4,23 +4,15 @@
  * @return {number}
  */
 var strStr = function (str, pattern) {
-  debugger
   if (!pattern) {
-    return str?-1:0;
+    return 0;
   }
   const patternLength = pattern.length;
   const strLength = str.length;
   let sindex = 0;
   let pindex = 0;
-  let sc;
-  let pc;
   const next = getNext(pattern);
-  console.log(next);
   while (sindex < strLength && pindex !== patternLength) {
-    if (pindex !== -1) {
-      sc = str[sindex];
-      pc = pattern[pindex];
-    }
     if (pindex === -1 || str[sindex] === pattern[pindex]) {
       sindex++;
       pindex++;
