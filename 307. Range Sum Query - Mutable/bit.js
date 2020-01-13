@@ -4,7 +4,6 @@
  * @param {number[]} nums
  */
 var NumArray = function (nums) {
-  this.nums = nums;
   const numLength = this.numLength = nums.length;
   const tree = this.tree = new Array(numLength + 1);
   tree.fill(0, 0, numLength + 1);
@@ -27,9 +26,9 @@ var NumArray = function (nums) {
  */
 NumArray.prototype.update = function (i, val) {
   let j = i + 1;
-  const diff = val - this.nums[i];
-  this.nums[i] = val;
   const tree = this.tree;
+  const num = prefixSum(tree, i) - prefixSum(tree, i - 1);
+  const diff = val - num;
   const numLength = this.numLength;
   while (j <= numLength) {
     tree[j] += diff;
