@@ -174,25 +174,24 @@ const api = module.exports = {
     console.log();
   },
 
-  visualizeTreeNode(n, fn, size) {
+  visualizeTreeNode(n, format, size) {
     infix(n);
     const maxWidth = getMaxWidthNode(n, size);
     let prevEl;
     let queue = [n];
-    let ls=[];
+    let ls = [];
     while (queue.length) {
       prevEl = null;
       let l = '';
       const nq = [];
       for (const currentElement of queue) {
-        debugger
         if (!prevEl) {
-          l += (paddingSpace('', maxWidth).repeat(currentElement.order - 1));
+          l += (' '.repeat(maxWidth).repeat(currentElement.order - 1));
         } else {
-          l += (paddingSpace('', maxWidth).repeat(currentElement.order - prevEl.order - 1));
+          l += (' '.repeat(maxWidth).repeat(currentElement.order - prevEl.order - 1));
         }
         prevEl = currentElement;
-        l += (paddingSpace(fn(currentElement), maxWidth));
+        l += ' '.repeat(maxWidth - size(currentElement)) + format(currentElement);
         if (currentElement.left) {
           nq.push(currentElement.left);
         }
