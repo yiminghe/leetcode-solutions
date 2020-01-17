@@ -14,6 +14,16 @@ function padding(n, l) {
   return s;
 }
 
+function paddingSpace(n, l) {
+  var s = n;
+  const prefix = ' ';
+  s += '';
+  while (s.length < l) {
+    s = prefix + s;
+  }
+  return s;
+}
+
 function getMaxWidth(arr) {
   let l = -1;
   arr.forEach(t => {
@@ -26,28 +36,6 @@ function getMaxWidth(arr) {
   });
   return l;
 }
-
-function getLevel(arr) {
-  const l = arr.length;
-  let index = 0;
-  let limit = 1;
-  let element;
-  let level = 0;
-  while (index < l) {
-    let count = 0;
-    while (index < limit && index < l) {
-      element = arr[index];
-      if (element) {
-        count++;
-      }
-      index++;
-    }
-    level++;
-    limit += count * 2;
-  }
-  return level;
-}
-
 
 function getStackNode(n, state = 1) {
   if (!n) {
@@ -101,16 +89,16 @@ function traverse(root, order) {
 
 const aCharCode = 'a'.charCodeAt(0);
 
-function collecTrie(root , s,ans) {
-  if(root.isWord){
+function collecTrie(root, s, ans) {
+  if (root.isWord) {
     ans.push(s);
   }
-  const {children}=root;
-  for(var i=0;i<26;i++){
-    const c=children[i];
-    if(c){
-        const ms=s+String.fromCharCode(i+aCharCode);
-        collecTrie(c,ms,ans);
+  const { children } = root;
+  for (var i = 0; i < 26; i++) {
+    const c = children[i];
+    if (c) {
+      const ms = s + String.fromCharCode(i + aCharCode);
+      collecTrie(c, ms, ans);
     }
   }
   return;
@@ -153,14 +141,13 @@ const api = module.exports = {
     return arr[0];
   },
 
-  printTrie(root){
-    const ans=[];
-    collecTrie(root,'',ans);
+  printTrie(root) {
+    const ans = [];
+    collecTrie(root, '', ans);
     console.log(ans);
   },
 
-  visualizeTree(arr) {
-
+  visualizeTreeArr(arr) {
     const maxWidth = getMaxWidth(arr);
     const root = api.createTree(arr);
     infix(root);
@@ -173,21 +160,62 @@ const api = module.exports = {
           prevEl = null;
           currentLevel = currentElement.level;
         }
+
         if (!prevEl) {
           write(padding(' ', maxWidth).repeat(currentElement.order - 1));
-
         } else {
           write(padding(' ', maxWidth).repeat(currentElement.order - prevEl.order - 1));
         }
 
         prevEl = currentElement;
-
         write(padding(currentElement.val, maxWidth));
       }
     }
     console.log();
+  },
+
+  visualizeTreeNode(n, fn, size) {
+    infix(n);
+    const maxWidth = getMaxWidthNode(n, size);
+    let prevEl;
+    let queue = [n];
+    let ls=[];
+    while (queue.length) {
+      prevEl = null;
+      let l = '';
+      const nq = [];
+      for (const currentElement of queue) {
+        debugger
+        if (!prevEl) {
+          l += (paddingSpace('', maxWidth).repeat(currentElement.order - 1));
+        } else {
+          l += (paddingSpace('', maxWidth).repeat(currentElement.order - prevEl.order - 1));
+        }
+        prevEl = currentElement;
+        l += (paddingSpace(fn(currentElement), maxWidth));
+        if (currentElement.left) {
+          nq.push(currentElement.left);
+        }
+        if (currentElement.right) {
+          nq.push(currentElement.right);
+        }
+      }
+      queue = nq;
+      ls.push(l);
+    }
+    return ls.join('\n');
   }
 };
+
+function getMaxWidthNode(n, fn) {
+  if (!n) {
+    return 0;
+  }
+  const my = fn(n);
+  const left = getMaxWidthNode(n.left, fn);
+  const right = getMaxWidthNode(n.right, fn);
+  return Math.max(my, left, right);
+}
 
 function infix(root, order = [0]) {
   if (!root) {
@@ -196,5 +224,4 @@ function infix(root, order = [0]) {
   infix(root.left, order);
   root.order = ++order[0];
   infix(root.right, order);
-
 }

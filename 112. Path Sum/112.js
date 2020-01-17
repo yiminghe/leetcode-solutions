@@ -32,7 +32,7 @@ var hasPathSum = function (root, sum, path, tag = 'root') {
 };
 
 (function () {
-  const { createTree, visualizeTree } = require('../utils/tree');
+  const { createTree, visualizeTreeArr } = require('../utils/tree');
 
   const treeArr = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1];
   let root = createTree(treeArr.concat());
@@ -40,7 +40,7 @@ var hasPathSum = function (root, sum, path, tag = 'root') {
 
   console.log(hasPathSum(root, 22, []));
 
-  root = (visualizeTree(treeArr));
+  root = (visualizeTreeArr(treeArr));
   // console.log(JSON.stringify(root,null,2));
 })();
 
