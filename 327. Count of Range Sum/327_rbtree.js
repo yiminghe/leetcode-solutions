@@ -8,7 +8,7 @@ function distance(node1, node2) {
     ret += n.val.length;
     n = n.getNext();
   }
-  return n === node2 ? ret+n.val.length : 0;
+  return n === node2 ? ret + n.val.length : 0;
 }
 
 /**
@@ -52,8 +52,4 @@ var countRangeSum = function (nums, lower, upper) {
   return ret;
 };
 
-let nums = [-2, 0, 1];
-let lower = -2;
-let upper = 2;
-
-console.log(countRangeSum(nums, lower, upper));
+module.exports = countRangeSum;
