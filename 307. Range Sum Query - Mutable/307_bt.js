@@ -10,7 +10,7 @@ function buildTree(tree, nums, treeIndex, i, j) {
   buildTree(tree, nums, rightTreeIndex, mid + 1, j);
   tree[treeIndex] = tree[leftTreeIndex] + tree[rightTreeIndex];
 }
-
+// tree array
 function updateTree(tree, treeIndex, i, j, val, arrIndex) {
   if (i === j) {
     tree[treeIndex] = val;
@@ -77,15 +77,4 @@ NumArray.prototype.sumRange = function (i, j) {
   return sumTree(this.tree, 0, 0, this.numLength, i, j);
 };
 
-/**
- * Your NumArray object will be instantiated and called as such:
- * var obj = new NumArray(nums)
- * obj.update(i,val)
- * var param_2 = obj.sumRange(i,j)
- */
-
-
-const na = new NumArray([0, 9, 5, 7, 3]);
-
-
-console.log(na.sumRange(2, 4));
+module.exports = NumArray;

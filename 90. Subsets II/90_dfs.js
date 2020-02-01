@@ -26,4 +26,4 @@ var subsetsWithDup = function (nums) {
   return ans;
 };
 
-console.log(subsetsWithDup([1, 2, 1]));
+module.exports = subsetsWithDup;

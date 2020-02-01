@@ -8,7 +8,7 @@ var longestDupSubstring = function (s) {
   let tmp;
   let dp = new Array(l + 1);
   lastDp.fill(0);
-  let maxStart = -1;
+  let maxEndIndex = -1;
   let max = 0;
   for (let start = 1; start <= l; start++) {
     for (let end = start + 1; end <= l; end++) {
@@ -16,7 +16,7 @@ var longestDupSubstring = function (s) {
         dp[end] = lastDp[end - 1] + 1;
         if (dp[end] > max) {
           max = dp[end];
-          maxStart = start;
+          maxEndIndex = end;
         }
       } else {
         dp[end] = 0;
@@ -26,8 +26,7 @@ var longestDupSubstring = function (s) {
     dp = lastDp;
     lastDp = tmp;
   }
-  return max ? s.slice(maxStart - max, maxStart) : '';
+  return max ? s.slice(maxEndIndex - max, maxEndIndex) : '';
 };
 
-
-console.log(longestDupSubstring("abceabcf"));
+module.exports=longestDupSubstring;

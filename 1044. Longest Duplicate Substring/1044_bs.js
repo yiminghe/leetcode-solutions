@@ -14,7 +14,7 @@ class RollingHash {
     }
 
     hash[0] = 0;
-
+    // h[i]=s[0]*ps[i-1] + s[1]*ps[i-1-1] + ...+s[i-1]*ps[i-1-(i-1)]
     for (let i = 1; i <= s.length; i++) {
       hash[i] = (hash[i - 1] * p + s.charCodeAt(i - 1)-a) % m;
     }
@@ -90,3 +90,5 @@ var longestDupSubstring = function (s) {
 
   return ans === -1 ? '' : s.slice(ans, ans + ansLen);
 };
+
+module.exports=longestDupSubstring;

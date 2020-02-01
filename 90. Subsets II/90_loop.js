@@ -31,3 +31,5 @@ var subsetsWithDup = function(nums) {
   
   return subsets;
 };
+
+module.exports = subsetsWithDup;
