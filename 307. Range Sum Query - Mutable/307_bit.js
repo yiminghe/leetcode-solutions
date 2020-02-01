@@ -1,5 +1,19 @@
 // https://cs.stackexchange.com/questions/10538/bit-what-is-the-intuition-behind-a-binary-indexed-tree-and-how-was-it-thought-a
 
+
+
+/*
+
+                100
+               [+37]
+              /     \
+          010         110
+         [+11]       [+80]
+         /   \       /   \
+       001   011   101   111
+      [+10] [+15] [+52] [ +0]
+
+*/
 /**
  * @param {number[]} nums
  */
@@ -12,12 +26,20 @@ var NumArray = function (nums) {
   }
   for (let i = 0; i < numLength; i++) {
     const ii = i + 1;
-    const j = ii + (ii & -ii);
+    const j = getLargerAncestorNode(ii);
     if (j <= numLength) {
       tree[j] += tree[ii];
     }
   }
 };
+
+function getLargerAncestorNode(i) {
+  return i + (i & -i);
+}
+
+function getSmallerAncestorNode(i) {
+  return i - (i & -i);
+}
 
 /** 
  * @param {number} i 
@@ -32,7 +54,7 @@ NumArray.prototype.update = function (i, val) {
   const numLength = this.numLength;
   while (j <= numLength) {
     tree[j] += diff;
-    j += (j & -j);
+    j = getLargerAncestorNode(j)
   }
 };
 
@@ -51,7 +73,7 @@ function prefixSum(tree, index) {
   let ret = 0;
   while (j) {
     ret += tree[j];
-    j -= (j & -j);
+    j = getSmallerAncestorNode(j);
   }
   return ret;
 }
