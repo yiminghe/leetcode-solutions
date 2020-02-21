@@ -10,24 +10,27 @@ var combinationSum3 = function (k, n) {
   const ret = [];
   const ans = [];
   function dfs(index, remain) {
-    if (remain === 0 && ans.length===k) {
+    if (remain < 0) {
+      return;
+    }
+
+    if (remain === 0 && ans.length === k) {
       ret.push(ans.concat());
       return;
     }
-    if (index > end || ans.length===k) {
+    if (index > end || ans.length === k) {
       return;
     }
 
     ans.push(index);
-    dfs(index+1,remain-index);
+    dfs(index + 1, remain - index);
     ans.pop();
-    dfs(index+1,remain);
+    dfs(index + 1, remain);
   }
 
-  dfs(1,n);
+  dfs(1, n);
 
   return ret;
 };
 
-debugger
-console.log(combinationSum3(2,6));
+console.log(combinationSum3(2, 6));

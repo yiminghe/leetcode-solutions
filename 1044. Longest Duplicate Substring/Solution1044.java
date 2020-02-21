@@ -1,4 +1,4 @@
-class Solution {
+class Solution1044 {
   public String longestDupSubstring(String s) {
     int l = s.length();
     int[] lastDp = new int[l + 1];
