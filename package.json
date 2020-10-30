@@ -1,6 +1,7 @@
 {
   "private": true,
   "dependencies": {
+    "@types/node": "^14.14.6",
     "@yiminghe/rbtree": "^0.2.0",
     "@yiminghe/suffix-tree": "^0.1.8",
     "chalk": "^3.0.0",
