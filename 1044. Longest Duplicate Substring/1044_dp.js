@@ -29,4 +29,4 @@ var longestDupSubstring = function (s) {
   return max ? s.slice(maxEndIndex - max, maxEndIndex) : '';
 };
 
-module.exports=longestDupSubstring;
+module.exports = longestDupSubstring;

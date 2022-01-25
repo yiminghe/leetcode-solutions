@@ -23,9 +23,8 @@ function swap(nums, i, j) {
   if (i === j) {
     return;
   }
-  ([nums[i], nums[j]] = [nums[j], nums[i]]);
+  [nums[i], nums[j]] = [nums[j], nums[i]];
 }
-
 
 var findKthLargest = function (nums, k) {
   let ret = quickSort(nums, 0, nums.length - 1, k - 1);

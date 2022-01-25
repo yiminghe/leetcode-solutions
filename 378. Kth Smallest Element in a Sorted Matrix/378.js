@@ -10,7 +10,7 @@ var kthSmallest = function (matrix, k) {
   let ans;
   let middle;
   while (l <= r) {
-    middle = (l + r) / 2 | 0;
+    middle = ((l + r) / 2) | 0;
     if (judge(matrix, middle, k)) {
       ans = middle;
       l = middle + 1;
@@ -37,12 +37,11 @@ function judge(matrix, t, k) {
   return k > ans;
 }
 
-
 let matrix = [
-  [ 1,  5,  9],
-  [10, 11, 13],
-  [12, 13, 15]
-],
-k = 8;
+    [1, 5, 9],
+    [10, 11, 13],
+    [12, 13, 15],
+  ],
+  k = 8;
 
 console.log(kthSmallest(matrix, k));

@@ -5,11 +5,23 @@ const { runs } = require('../utils/utils');
 function run(NumArray) {
   return () => {
     let cmd = [
-      "NumArray", "update", "update", "update", "sumRange", "update", "sumRange",
+      'NumArray',
+      'update',
+      'update',
+      'update',
+      'sumRange',
+      'update',
+      'sumRange',
       //"update", "sumRange", "sumRange", "update"
-    ]
+    ];
     let data = [
-      [[7, 2, 7, 2, 0]], [4, 6], [0, 2], [0, 9], [4, 4], [3, 8], [0, 4],
+      [[7, 2, 7, 2, 0]],
+      [4, 6],
+      [0, 2],
+      [0, 9],
+      [4, 4],
+      [3, 8],
+      [0, 4],
       //[4, 1], [0, 3], [0, 4], [0, 4]
     ];
 

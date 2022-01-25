@@ -3,10 +3,10 @@ const a = 96; //'a'.charCodeAt(0) - 1;
 class RollingHash {
   constructor(s, dp) {
     this.s = s;
-    const p = this.p = dp || 40;
-    const hash = this.hash = new Array(s.length + 1);
-    const m = this.m = 1<<30;
-    const ps = this.ps = new Array(s.length + 1);
+    const p = (this.p = dp || 40);
+    const hash = (this.hash = new Array(s.length + 1));
+    const m = (this.m = 1 << 30);
+    const ps = (this.ps = new Array(s.length + 1));
 
     ps[0] = 1;
     for (let i = 1; i < s.length; i++) {
@@ -16,7 +16,7 @@ class RollingHash {
     hash[0] = 0;
     // h[i]=s[0]*ps[i-1] + s[1]*ps[i-1-1] + ...+s[i-1]*ps[i-1-(i-1)]
     for (let i = 1; i <= s.length; i++) {
-      hash[i] = (hash[i - 1] * p + s.charCodeAt(i - 1)-a) % m;
+      hash[i] = (hash[i - 1] * p + s.charCodeAt(i - 1) - a) % m;
     }
   }
 
@@ -24,7 +24,7 @@ class RollingHash {
     const hash = this.hash;
     const m = this.m;
     const ps = this.ps;
-    return (hash[j] + m - (hash[i] * ps[j - i]) % m) % m;
+    return (hash[j] + m - ((hash[i] * ps[j - i]) % m)) % m;
   }
 }
 
@@ -77,7 +77,7 @@ var longestDupSubstring = function (s) {
   }
 
   while (l < r) {
-    mid = (l + r) / 2 | 0;
+    mid = ((l + r) / 2) | 0;
     index = getIndex(mid);
     if (index !== -1) {
       ans = index;
@@ -91,4 +91,4 @@ var longestDupSubstring = function (s) {
   return ans === -1 ? '' : s.slice(ans, ans + ansLen);
 };
 
-module.exports=longestDupSubstring;
+module.exports = longestDupSubstring;

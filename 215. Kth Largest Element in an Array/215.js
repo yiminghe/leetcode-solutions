@@ -22,10 +22,10 @@ var findKthLargest = function (nums, k) {
 function insert(heap, index, value) {
   heap[index] = value;
   while (index) {
-    const parent = (index - 1) / 2 | 0;
+    const parent = ((index - 1) / 2) | 0;
     if (heap[parent] > heap[index]) {
       swap(heap, index, parent);
-      index=parent;
+      index = parent;
     } else {
       break;
     }
@@ -49,7 +49,7 @@ function heapify(heap, i, size) {
 }
 
 function swap(nums, i, j) {
-  ([nums[i], nums[j]] = [nums[j], nums[i]]);
+  [nums[i], nums[j]] = [nums[j], nums[i]];
 }
 
 let nums = [3, 2, 3, 1, 2, 4, 5, 5, 6];

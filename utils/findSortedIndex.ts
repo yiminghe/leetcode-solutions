@@ -1,5 +1,10 @@
-
-type FindSortedIndexComparator<ArrayItem, Item> = (left: ArrayItem, right: Item, index: number, low: number, high: number) => 1 | 0 | -1;
+type FindSortedIndexComparator<ArrayItem, Item> = (
+  left: ArrayItem,
+  right: Item,
+  index: number,
+  low: number,
+  high: number,
+) => 1 | 0 | -1;
 
 function defaultComparator(source: any, target: any) {
   if (target === source) {
@@ -19,7 +24,7 @@ module.exports.findSortedIndex = function findSortedIndex<ArrayItem, Item>(
   let low = 0;
   let high = array.length;
   while (low < high) {
-    const mid = low + ((high - low) / 2 | 0);
+    const mid = low + (((high - low) / 2) | 0);
     const compareResult = compare(array[mid], value, mid, low, high);
     if (compareResult === 0) {
       return {
@@ -31,7 +36,9 @@ module.exports.findSortedIndex = function findSortedIndex<ArrayItem, Item>(
     } else if (compareResult === 1) {
       high = mid;
     } else {
-      throw new Error(`findSortedIndex: comparator return unexpected value ${compareResult}`);
+      throw new Error(
+        `findSortedIndex: comparator return unexpected value ${compareResult}`,
+      );
     }
   }
   return {

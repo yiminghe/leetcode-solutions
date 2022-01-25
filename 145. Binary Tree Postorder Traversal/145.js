@@ -12,13 +12,13 @@ const { createTree, traverse } = require('../utils/tree');
  * @return {number[]}
  */
 var postorderTraversal = function (root) {
-  return traverse(root, 'post')
+  return traverse(root, 'post');
 };
 
 const root = createTree([1, 4, 2, 3, 5, null, null, null, null, 7]);
 
 console.log(postorderTraversal(root));
 
-console.log(traverse(root,'pre'));
+console.log(traverse(root, 'pre'));
 
-console.log(traverse(root,'in'));
+console.log(traverse(root, 'in'));

@@ -32,7 +32,7 @@ function lowerbound(arr, t) {
   let middle;
   let ans = -1;
   while (left < right) {
-    middle = left + ((right - left) / 2 | 0);
+    middle = left + (((right - left) / 2) | 0);
     if (arr[middle] === t) {
       return t;
     }

@@ -33,7 +33,7 @@ var combinationSum = function (candidates, target) {
   return ret;
 };
 
-const candidates = [2,3,5];
+const candidates = [2, 3, 5];
 const target = 8;
 
-console.log(combinationSum(candidates,target));
+console.log(combinationSum(candidates, target));

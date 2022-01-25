@@ -1,5 +1,3 @@
-
-
 function write(s) {
   process.stdout.write(s + '');
 }
@@ -26,7 +24,7 @@ function paddingSpace(n, l) {
 
 function getMaxWidth(arr) {
   let l = -1;
-  arr.forEach(t => {
+  arr.forEach((t) => {
     if (t) {
       t += '';
       if (t.length > l) {
@@ -47,7 +45,47 @@ function getStackNode(n, state = 1) {
   };
 }
 
+function makeStackNode(node, encounter = 0) {
+  return { node, encounter };
+}
+
 function traverse(root, order) {
+  if (!root) {
+    return [];
+  }
+  const ret = [];
+  const stack = [makeStackNode(root)];
+  while (stack.length) {
+    const cur = stack.pop();
+    cur.encounter++;
+    const { node } = cur;
+    if (cur.encounter === 1) {
+      if (order === 'pre') {
+        ret.push(node.val);
+      }
+      stack.push(cur);
+
+      if (node.left) {
+        stack.push(makeStackNode(node.left));
+      }
+    } else if (cur.encounter === 2) {
+      if (order === 'in') {
+        ret.push(node.val);
+      }
+      stack.push(cur);
+      if (node.right) {
+        stack.push(makeStackNode(node.right));
+      }
+    } else if (cur.encounter === 3) {
+      if (order === 'post') {
+        ret.push(node.val);
+      }
+    }
+  }
+  return ret;
+}
+
+function traverse2(root, order) {
   if (!root) {
     return [];
   }
@@ -104,14 +142,14 @@ function collecTrie(root, s, ans) {
   return;
 }
 
-const api = module.exports = {
+const api = (module.exports = {
   traverse,
   createTree(arr) {
     arr.forEach((element, index) => {
       if (arr[index]) {
         arr[index] = {
           val: element,
-        }
+        };
       }
     });
     const l = arr.length;
@@ -164,7 +202,11 @@ const api = module.exports = {
         if (!prevEl) {
           write(padding(' ', maxWidth).repeat(currentElement.order - 1));
         } else {
-          write(padding(' ', maxWidth).repeat(currentElement.order - prevEl.order - 1));
+          write(
+            padding(' ', maxWidth).repeat(
+              currentElement.order - prevEl.order - 1,
+            ),
+          );
         }
 
         prevEl = currentElement;
@@ -186,12 +228,15 @@ const api = module.exports = {
       const nq = [];
       for (const currentElement of queue) {
         if (!prevEl) {
-          l += (' '.repeat(maxWidth).repeat(currentElement.order - 1));
+          l += ' '.repeat(maxWidth).repeat(currentElement.order - 1);
         } else {
-          l += (' '.repeat(maxWidth).repeat(currentElement.order - prevEl.order - 1));
+          l += ' '
+            .repeat(maxWidth)
+            .repeat(currentElement.order - prevEl.order - 1);
         }
         prevEl = currentElement;
-        l += ' '.repeat(maxWidth - size(currentElement)) + format(currentElement);
+        l +=
+          ' '.repeat(maxWidth - size(currentElement)) + format(currentElement);
         if (currentElement.left) {
           nq.push(currentElement.left);
         }
@@ -203,8 +248,8 @@ const api = module.exports = {
       ls.push(l);
     }
     return ls.join('\n');
-  }
-};
+  },
+});
 
 function getMaxWidthNode(n, fn) {
   if (!n) {

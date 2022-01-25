@@ -1,6 +1,5 @@
 const RBTree = require('@yiminghe/rbtree').default;
 
-
 function distance(node1, node2) {
   let n = node1;
   let ret = 0;

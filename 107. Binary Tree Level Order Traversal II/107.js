@@ -10,7 +10,7 @@
  * @return {number[][]}
  */
 var levelOrderBottom = function (root) {
-  if(!root){
+  if (!root) {
     return [];
   }
   const ret = [];
@@ -33,8 +33,7 @@ var levelOrderBottom = function (root) {
   return ret;
 };
 
-const {createTree} = require('../utils/tree');
-const root = createTree([3,9,20,null,null,15,7]);
+const { createTree } = require('../utils/tree');
+const root = createTree([3, 9, 20, null, null, 15, 7]);
 
 console.log(levelOrderBottom(root));
-

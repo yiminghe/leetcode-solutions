@@ -20,5 +20,4 @@ var lengthOfLongestSubstring = function (s) {
   return ret;
 };
 
-
 console.log(lengthOfLongestSubstring('abccdf'));

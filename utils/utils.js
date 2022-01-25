@@ -8,7 +8,7 @@ function timeTag(tag) {
   return `${tag} time:`;
 }
 
-const util = module.exports = {
+const util = (module.exports = {
   padding(str, n) {
     while (str.length < n) {
       str += ' ';
@@ -27,7 +27,7 @@ const util = module.exports = {
     console.log(util.padding(timeTag(tag), size), time);
     console.log(`${tag} end!`);
   },
-  runs(fns, args=[]) {
+  runs(fns, args = []) {
     let size = -1;
     Object.keys(fns).forEach((tag) => {
       size = Math.max(size, tag.length);
@@ -37,5 +37,5 @@ const util = module.exports = {
       const fn = fns[tag];
       util.run(tag, () => fn(...args), size);
     });
-  }
-};
+  },
+});

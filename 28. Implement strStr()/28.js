@@ -36,10 +36,10 @@ function getNext(p) {
     if (i === -1 || p[i] === p[j]) {
       i++;
       j++;
-      if(p[i]===p[j]){
-        let ii=i;
-        while(ii!==-1 && p[ii]===p[j]){
-          ii=next[j]=next[ii];
+      if (p[i] === p[j]) {
+        let ii = i;
+        while (ii !== -1 && p[ii] === p[j]) {
+          ii = next[j] = next[ii];
         }
       } else {
         next[j] = i;
@@ -51,14 +51,15 @@ function getNext(p) {
   return next;
 }
 
-let haystack = "hello", needle = "ll";
+let haystack = 'hello',
+  needle = 'll';
 console.log(strStr(haystack, needle));
 
-haystack = "aaaaa", needle = "bba";
+(haystack = 'aaaaa'), (needle = 'bba');
 console.log(strStr(haystack, needle));
 
-needle = "abcdabd";
+needle = 'abcdabd';
 console.log(getNext(needle));
 
-needle = "abab";
+needle = 'abab';
 console.log(getNext(needle));

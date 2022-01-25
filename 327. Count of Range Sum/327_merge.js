@@ -19,7 +19,7 @@ function merge(sum, start, end, lower, upper) {
   if (end - start <= 1) {
     return 0;
   }
-  const mid = start + ((end - start) / 2 | 0);
+  const mid = start + (((end - start) / 2) | 0);
   let lret = merge(sum, start, mid, lower, upper);
   let rret = merge(sum, mid, end, lower, upper);
   let tmp = [];
@@ -32,7 +32,7 @@ function merge(sum, start, end, lower, upper) {
   for (let j = start; j < mid; j++) {
     let startV = sum[j];
     let lowerBound = startV + lower;
-    let upperBound = startV +upper;
+    let upperBound = startV + upper;
     let startI = mid;
     while (startI < end && sum[startI] < lowerBound) {
       startI++;

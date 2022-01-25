@@ -18,7 +18,7 @@ var subsets = function (nums) {
     dfs(index + 1);
   }
 
-  debugger
+  debugger;
 
   dfs(0);
 

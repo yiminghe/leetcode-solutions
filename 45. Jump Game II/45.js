@@ -13,11 +13,10 @@ function jump(nums) {
   return cur >= i - 1 ? result : -1;
 }
 
-
 let nums;
 
 nums = [2, 3, 1, 1, 4];
 
-nums = [3,2,1,0,5];
+nums = [3, 2, 1, 0, 5];
 
 console.log(jump(nums));

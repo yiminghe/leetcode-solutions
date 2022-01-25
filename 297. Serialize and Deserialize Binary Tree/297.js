@@ -17,7 +17,7 @@ var serialize = function (root) {
     return '[]';
   }
   let queue = [root];
-  const ret = []
+  const ret = [];
   while (queue.length) {
     let newQueue = [];
     for (const q of queue) {
@@ -89,14 +89,11 @@ var deserialize = function (data) {
  * deserialize(serialize(root));
  */
 
-
-
 const { createTree } = require('../utils/tree');
 
 let tree = createTree([1, 2, 3, 4, 5]);
 
 let s = serialize(tree);
-
 
 tree = deserialize(s);
 

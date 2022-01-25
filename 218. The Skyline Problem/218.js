@@ -8,7 +8,7 @@ var getSkyline = function (buildings) {
   }
   const root = new Node(0, Number.MAX_SAFE_INTEGER, 0);
   for (const b of buildings) {
-    insert(root, b[0], b[1]-1, b[2]);
+    insert(root, b[0], b[1] - 1, b[2]);
   }
   const ret = [];
   output(root, ret);
@@ -36,7 +36,7 @@ function insert(r, s, e, h) {
       insert(r.right, s, e, h);
     } else {
       r.left = new Node(r.s, e, r.h);
-      r.right = new Node(e+1, r.e, r.h);
+      r.right = new Node(e + 1, r.e, r.h);
       insert(r.left, s, e, h);
     }
   } else {
@@ -44,7 +44,6 @@ function insert(r, s, e, h) {
     insert(r.right, s, e, h);
   }
 }
-
 
 function output(r, ret, last = [0]) {
   if (r) {
@@ -61,10 +60,12 @@ function output(r, ret, last = [0]) {
 
 let buildings = [
   [2, 9, 10],
-  [3, 7, 15], [5, 12, 12], [15, 20, 10], [19, 24, 8]
+  [3, 7, 15],
+  [5, 12, 12],
+  [15, 20, 10],
+  [19, 24, 8],
 ];
 
 // buildings = [[2, 4, 7], [2, 4, 5], [2, 4, 6]];
-
 
 console.log(getSkyline(buildings));

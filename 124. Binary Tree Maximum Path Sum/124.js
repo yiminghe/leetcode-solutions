@@ -62,9 +62,8 @@ var maxPathSum = function (root) {
 
     return max;
   }
-  
-  getMaxPath(root);
 
+  getMaxPath(root);
 
   console.log(maxAnsPath);
 

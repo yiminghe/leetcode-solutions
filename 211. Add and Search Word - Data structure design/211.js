@@ -21,7 +21,7 @@ var WordDictionary = function () {
 };
 
 /**
- * Adds a word into the data structure. 
+ * Adds a word into the data structure.
  * @param {string} word
  * @return {void}
  */
@@ -42,7 +42,7 @@ WordDictionary.prototype.addWord = function (word) {
 };
 
 /**
- * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. 
+ * Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
  * @param {string} word
  * @return {boolean}
  */
@@ -80,19 +80,18 @@ WordDictionary.getCharIndex = getCharIndex;
 
 module.exports = WordDictionary;
 
-
 const w = new WordDictionary();
 
-w.addWord("bad");
-w.addWord("dad");
-w.addWord("mad");
+w.addWord('bad');
+w.addWord('dad');
+w.addWord('mad');
 
-console.log(w.search('bad'))
+console.log(w.search('bad'));
 
-console.log(w.search('pad'))
+console.log(w.search('pad'));
 
-console.log(w.search('.ad'))
-console.log(w.search('b..'))
+console.log(w.search('.ad'));
+console.log(w.search('b..'));
 
 /**
  * Your WordDictionary object will be instantiated and called as such:

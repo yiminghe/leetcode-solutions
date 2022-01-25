@@ -3,7 +3,7 @@
  * @param {string} t
  * @return {boolean}
  */
-var isSubsequence = function (t,s) {
+var isSubsequence = function (t, s) {
   let si = 0;
   let ti = 0;
   let sl = s.length;

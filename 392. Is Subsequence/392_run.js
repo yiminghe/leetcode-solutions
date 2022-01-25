@@ -7,7 +7,10 @@ let t = 'acb';
 
 const { runs } = require('../utils/utils');
 
-runs({
-  isSubsequenceBs,
-  isSubsequenceTp,
-}, [t,s]);
+runs(
+  {
+    isSubsequenceBs,
+    isSubsequenceTp,
+  },
+  [t, s],
+);

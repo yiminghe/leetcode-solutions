@@ -51,6 +51,9 @@ var exist = function (board, word) {
   return false;
 };
 
-const board = [["a", "b"], ["c", "d"]];
+const board = [
+  ['a', 'b'],
+  ['c', 'd'],
+];
 
-console.log(exist(board, "abcd"));
+console.log(exist(board, 'abcd'));

@@ -21,7 +21,6 @@ var canCompleteCircuit = function (gas, cost) {
   return total >= 0 ? start : -1;
 };
 
-
 let gas = [1, 2, 3, 4, 5];
 let cost = [3, 4, 5, 1, 2];
 

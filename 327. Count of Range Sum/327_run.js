@@ -10,7 +10,10 @@ let upper = 0;
 // lower = -2;
 // upper = 2;
 
-runs({
-  countRangeSumMerge,
-  countRangeSumRBTree,
-}, [nums,lower,upper])
+runs(
+  {
+    countRangeSumMerge,
+    countRangeSumRBTree,
+  },
+  [nums, lower, upper],
+);

@@ -3,7 +3,7 @@ function buildTree(tree, nums, treeIndex, i, j) {
     tree[treeIndex] = nums[i];
     return;
   }
-  const mid = (i + j) / 2 | 0;
+  const mid = ((i + j) / 2) | 0;
   const leftTreeIndex = 2 * treeIndex + 1;
   const rightTreeIndex = leftTreeIndex + 1;
   buildTree(tree, nums, leftTreeIndex, i, mid);
@@ -16,7 +16,7 @@ function updateTree(tree, treeIndex, i, j, val, arrIndex) {
     tree[treeIndex] = val;
     return;
   }
-  const mid = (i + j) / 2 | 0;
+  const mid = ((i + j) / 2) | 0;
   const left = 2 * treeIndex + 1;
   const right = left + 1;
   if (arrIndex > mid) {
@@ -28,11 +28,10 @@ function updateTree(tree, treeIndex, i, j, val, arrIndex) {
 }
 
 function sumTree(tree, treeIndex, low, high, i, j) {
-
   if (low === i && high === j) {
     return tree[treeIndex];
   }
-  const mid = (low + high) / 2 | 0;
+  const mid = ((low + high) / 2) | 0;
   if (j <= mid) {
     return sumTree(tree, 2 * treeIndex + 1, low, mid, i, j);
   } else if (i > mid) {
@@ -45,7 +44,6 @@ function sumTree(tree, treeIndex, low, high, i, j) {
   return leftSum + rightSum;
 }
 
-
 /**
  * @param {number[]} nums
  */
@@ -53,23 +51,22 @@ var NumArray = function (nums) {
   //const n = nums.length;
   this.numLength = nums.length - 1;
   if (this.numLength >= 0) {
-    const tree = this.tree = new Array(4 * nums.length);
+    const tree = (this.tree = new Array(4 * nums.length));
     buildTree(tree, nums, 0, 0, this.numLength);
   }
 };
 
-/** 
- * @param {number} i 
+/**
+ * @param {number} i
  * @param {number} val
  * @return {void}
  */
 NumArray.prototype.update = function (i, val) {
   updateTree(this.tree, 0, 0, this.numLength, val, i);
-
 };
 
-/** 
- * @param {number} i 
+/**
+ * @param {number} i
  * @param {number} j
  * @return {number}
  */

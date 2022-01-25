@@ -1,8 +1,7 @@
-const treeUtils=require('../utils/tree');
+const treeUtils = require('../utils/tree');
 
 const WordDictionary = require('../211. Add and Search Word - Data structure design/211');
 const { getCharIndex } = WordDictionary;
-
 
 const directionX = [-1, 1, 0, 0];
 const directionY = [0, 0, -1, 1];
@@ -22,7 +21,6 @@ var findWords = function (board, words) {
   const dictRoot = dict.root;
 
   //treeUtils.printTrie(dictRoot);
-
 
   const row = board.length;
   const col = board[0].length;
@@ -44,7 +42,7 @@ var findWords = function (board, words) {
       return;
     }
     let w = board[i][j];
-    let match=r.children[getCharIndex(w)];
+    let match = r.children[getCharIndex(w)];
     if (!match) {
       return;
     }
@@ -62,7 +60,7 @@ var findWords = function (board, words) {
 
   for (let i = 0; i < row; i++) {
     for (let j = 0; j < col; j++) {
-      check(dictRoot, i, j,'');
+      check(dictRoot, i, j, '');
     }
   }
 
@@ -70,11 +68,11 @@ var findWords = function (board, words) {
 };
 
 const board = [
-  ['o','a','a','n'],
-  ['e','t','a','e'],
-  ['i','h','k','r'],
-  ['i','f','l','v']
+  ['o', 'a', 'a', 'n'],
+  ['e', 't', 'a', 'e'],
+  ['i', 'h', 'k', 'r'],
+  ['i', 'f', 'l', 'v'],
 ];
 
-const words = ["oath","pea","eat","rain"];
+const words = ['oath', 'pea', 'eat', 'rain'];
 console.log(findWords(board, words));

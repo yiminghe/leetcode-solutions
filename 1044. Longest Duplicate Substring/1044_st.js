@@ -10,4 +10,4 @@ var longestDupSubstring = function (s) {
   return st.getLongestDupSubstr();
 };
 
-module.exports=longestDupSubstring;
+module.exports = longestDupSubstring;

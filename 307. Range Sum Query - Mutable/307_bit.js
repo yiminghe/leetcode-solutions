@@ -1,7 +1,5 @@
 // https://cs.stackexchange.com/questions/10538/bit-what-is-the-intuition-behind-a-binary-indexed-tree-and-how-was-it-thought-a
 
-
-
 /*
 
                 100
@@ -18,8 +16,8 @@
  * @param {number[]} nums
  */
 var NumArray = function (nums) {
-  const numLength = this.numLength = nums.length;
-  const tree = this.tree = new Array(numLength + 1);
+  const numLength = (this.numLength = nums.length);
+  const tree = (this.tree = new Array(numLength + 1));
   tree.fill(0, 0, numLength + 1);
   for (let i = 0; i < numLength; i++) {
     tree[i + 1] = nums[i];
@@ -41,8 +39,8 @@ function getSmallerAncestorNode(i) {
   return i - (i & -i);
 }
 
-/** 
- * @param {number} i 
+/**
+ * @param {number} i
  * @param {number} val
  * @return {void}
  */
@@ -54,12 +52,12 @@ NumArray.prototype.update = function (i, val) {
   const numLength = this.numLength;
   while (j <= numLength) {
     tree[j] += diff;
-    j = getLargerAncestorNode(j)
+    j = getLargerAncestorNode(j);
   }
 };
 
-/** 
- * @param {number} i 
+/**
+ * @param {number} i
  * @param {number} j
  * @return {number}
  */

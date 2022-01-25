@@ -15,7 +15,7 @@ var hasPathSum = function (root, sum, path, tag = 'root') {
     sum -= root.val;
     path.push(tag + ': ' + root.val);
     if (!root.left && !root.right) {
-      const ret = (sum === 0);
+      const ret = sum === 0;
       if (!ret) {
         path.pop();
       } else {
@@ -40,8 +40,6 @@ var hasPathSum = function (root, sum, path, tag = 'root') {
 
   console.log(hasPathSum(root, 22, []));
 
-  root = (visualizeTreeArr(treeArr));
+  root = visualizeTreeArr(treeArr);
   // console.log(JSON.stringify(root,null,2));
 })();
-
-

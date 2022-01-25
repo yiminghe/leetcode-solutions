@@ -1,5 +1,5 @@
 function buildHeap(nums, size) {
-  let i = ((size-1) / 2) | 0;
+  let i = ((size - 1) / 2) | 0;
   while (i >= 0) {
     heapify(nums, i, size);
     --i;
@@ -23,7 +23,7 @@ function heapify(nums, i, size) {
 }
 
 function swap(nums, i, j) {
-  ([nums[i], nums[j]] = [nums[j], nums[i]]);
+  [nums[i], nums[j]] = [nums[j], nums[i]];
 }
 
 /**
@@ -40,7 +40,7 @@ var findKthLargest = function (nums, k) {
     heapify(nums, 0, size);
     --k;
   }
-  return nums[0]
+  return nums[0];
 };
 
 let nums = [3, 2, 3, 1, 2, 4, 5, 5, 6];

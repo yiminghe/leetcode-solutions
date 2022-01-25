@@ -11,7 +11,6 @@ function TreeNode(val) {
   this.sum = 0;
 }
 
-
 function insert(val, node, ret, preSum, i) {
   if (!node) {
     node = new TreeNode(val);
@@ -41,6 +40,5 @@ var countSmaller = function (nums) {
   }
   return ret;
 };
-
 
 console.log(countSmaller([5, 5, 1, 1]));
