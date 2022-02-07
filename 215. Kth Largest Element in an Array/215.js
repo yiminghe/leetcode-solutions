@@ -7,7 +7,7 @@ var findKthLargest = function (nums, k) {
   const l = nums.length;
   const heap = new Array(k).fill(0);
   for (let i = 0; i < k; i++) {
-    insert(heap, i, nums[i]);
+    heapInsert(heap, i, nums[i]);
   }
   for (let i = k; i < l; i++) {
     const v = nums[i];
@@ -19,7 +19,7 @@ var findKthLargest = function (nums, k) {
   return heap[0];
 };
 
-function insert(heap, index, value) {
+function heapInsert(heap, index, value) {
   heap[index] = value;
   while (index) {
     const parent = ((index - 1) / 2) | 0;
@@ -33,18 +33,22 @@ function insert(heap, index, value) {
 }
 
 function heapify(heap, i, size) {
-  const leftIndex = 2 * i + 1;
-  const rightIndex = leftIndex + 1;
-  let smallestIndex = i;
-  if (leftIndex < size && heap[leftIndex] < heap[smallestIndex]) {
-    smallestIndex = leftIndex;
-  }
-  if (rightIndex < size && heap[rightIndex] < heap[smallestIndex]) {
-    smallestIndex = rightIndex;
-  }
-  if (smallestIndex !== i) {
-    swap(heap, smallestIndex, i);
-    heapify(heap, smallestIndex, size);
+  while (1) {
+    const leftIndex = 2 * i + 1;
+    const rightIndex = leftIndex + 1;
+    let smallestIndex = i;
+    if (leftIndex < size && heap[leftIndex] < heap[smallestIndex]) {
+      smallestIndex = leftIndex;
+    }
+    if (rightIndex < size && heap[rightIndex] < heap[smallestIndex]) {
+      smallestIndex = rightIndex;
+    }
+    if (smallestIndex !== i) {
+      swap(heap, smallestIndex, i);
+      i = smallestIndex;
+    } else {
+      break;
+    }
   }
 }
 
