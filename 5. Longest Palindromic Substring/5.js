@@ -21,7 +21,6 @@ var longestPalindrome = function (s) {
   // if(str[i]===str[j]) { if(arr[i+1][j-1]) arr[i][j] = arr[i+1][j-1]+2}
   // else {arr[i][j] = 0}
 
-
   for (var i = 0; i < len; i++) {
     setValue(arr, i, i, 1);
   }
@@ -48,11 +47,10 @@ var longestPalindrome = function (s) {
           ret = [i, j];
         }
       }
-
     }
   }
 
   return s.slice(ret[0], ret[1] + 1);
-}
+};
 
 console.log(longestPalindrome('babbad'));
