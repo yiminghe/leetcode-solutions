@@ -1,33 +1,25 @@
-var myAtoi = function (str) {
-  str = str.trim();
-  let flag = 1;
-  let index = 0;
-  let current = str[index];
-  if (current == '-') {
-    flag = 0;
-    index++;
-  } else if (current == '+') {
-    index++;
-  } else if (current < '0' || current > '9') {
-    return 0;
-  }
-  const l = str.length;
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function (x) {
+  let INT_MAX = (0x7fffffff / 10) | 0; // % = 7
+  let INT_MIN = ((0x80000000 | 0) / 10) | 0; // % = 8
   let rev = 0;
   let pop = 0;
-  let INT_MAX = (0x7fffffff / 10) | 0;
-  for (; index < l; index++) {
-    current = str[index];
-    if (current >= '0' && current <= '9') {
-      pop = current - '0';
-      if (flag) {
-        if (rev > INT_MAX || (rev == INT_MAX && pop > 7)) return 0;
-      } else {
-        if (rev > INT_MAX || (rev == INT_MAX && pop > 8)) return 0;
-      }
-      rev = rev * 10 + pop;
-    }
+  while (x) {
+    pop = x % 10;
+    x = (x / 10) | 0;
+    if (rev > INT_MAX || (rev == INT_MAX && pop > 7)) return 0;
+    if (rev < INT_MIN || (rev == INT_MIN && pop < -8)) return 0;
+    rev = rev * 10 + pop;
   }
   return rev;
 };
 
-module.exports = myAtoi;
+console.log(reverse(1234));
+
+
+console.log(reverse(-1234));
+
+console.log(reverse(1999999999999));
