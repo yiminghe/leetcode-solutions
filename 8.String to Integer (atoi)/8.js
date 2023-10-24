@@ -1,28 +1,33 @@
-var myAtoi = function (str) {
-  str = str.trim();
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var myAtoi = function(s) {
+  s = s.trim();
   let flag = 1;
   let index = 0;
-  let current = str[index];
+  let current = s[index];
   if (current == '-') {
     flag = 0;
     index++;
   } else if (current == '+') {
     index++;
   }
-  const l = str.length;
+  const l = s.length;
   let rev = 0;
   let pop = 0;
-  let INT_MAX = 0x7fffffff;
+  let INT_MAX = 0x7fffffff | 0;
   let INT_MIN = 0x80000000 | 0;
-  let INT_MAX_10 = (0x7fffffff / 10) | 0;
+  let INT_MAX_10 = (INT_MAX / 10) | 0;
+  let INT_MIN_10 = -((INT_MIN / 10) | 0);
   for (; index < l; index++) {
-    current = str[index];
+    current = s[index];
     if (current >= '0' && current <= '9') {
       pop = current - '0';
       if (flag) {
         if (rev > INT_MAX_10 || (rev == INT_MAX_10 && pop > 7)) return INT_MAX;
       } else {
-        if (rev > INT_MAX_10 || (rev == INT_MAX_10 && pop > 8)) return INT_MIN;
+        if (rev > INT_MIN_10 || (rev == INT_MIN_10 && pop > 8)) return INT_MIN;
       }
       rev = rev * 10 + pop;
     } else {
@@ -33,3 +38,6 @@ var myAtoi = function (str) {
 };
 
 module.exports = myAtoi;
+
+console.log(myAtoi('12344'));
+
