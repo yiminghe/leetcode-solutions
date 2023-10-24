@@ -9,53 +9,43 @@
  * @param {TreeNode} root
  * @return {number}
  */
-var maxPathSum = function (root) {
+var maxPathSum = function (root, maxAnsPath = []) {
   let ans = Number.MIN_SAFE_INTEGER;
-  let maxAnsPath;
 
   function getMaxPath(n) {
-    const nval = n.val;
-    if (!n.left && !n.right) {
-      if (ans < nval) {
-        ans = nval;
-        maxAnsPath = `[${nval}]`;
-      }
-      n.maxPath = `[${nval}]`;
-      return nval;
+    if (!n) {
+      return 0;
     }
 
-    let subAnsPath = `[${nval}`;
-    let subMaxPath = `[${nval}]`;
-    let max = nval;
-    let subAns = nval;
-    if (n.left) {
-      const maxleft = getMaxPath(n.left);
-      const nleftval = maxleft + nval;
-      if (nleftval > max) {
-        max = nleftval;
-        subMaxPath = `[${nval} l:${n.left.maxPath}]`;
-      }
-      if (subAns < nleftval) {
-        subAns = nleftval;
-        subAnsPath += ` l:${n.left.maxPath}`;
-      }
-    }
-    if (n.right) {
-      const maxright = getMaxPath(n.right);
-      const nrightval = maxright + nval;
-      if (nrightval > max) {
-        max = nrightval;
-        subMaxPath = `[${nval} r:${n.right.maxPath}]`;
-      }
-      if (maxright > 0) {
-        subAns += maxright;
-        subAnsPath += ` r:${n.right.maxPath}`;
+    const nodeValue = n.val;
+
+    let subMaxPath = `[${nodeValue}]`;
+    let max = nodeValue;
+    let maxLeft = Math.max(getMaxPath(n.left), 0);
+    let maxRight = Math.max(getMaxPath(n.right), 0);
+
+    if (maxRight || maxLeft) {
+      if (maxLeft > maxRight) {
+        max += maxLeft;
+        subMaxPath = `[${nodeValue} l:${n.left.maxPath}]`;
+      } else {
+        max += maxRight;
+        subMaxPath = `[${nodeValue} r:${n.right.maxPath}]`;
       }
     }
+
+    const subAns = nodeValue + maxLeft + maxRight;
 
     if (ans < subAns) {
       ans = subAns;
-      maxAnsPath = subAnsPath + ']';
+      maxAnsPath[0] = `[${nodeValue}`;
+      if (maxLeft > 0) {
+        maxAnsPath[0] += ` l:${n.left.maxPath}`;
+      }
+      if (maxRight > 0) {
+        maxAnsPath[0] += ` r:${n.right.maxPath}`;
+      }
+      maxAnsPath[0] += ']';
     }
 
     n.maxPath = subMaxPath;
@@ -65,17 +55,16 @@ var maxPathSum = function (root) {
 
   getMaxPath(root);
 
-  console.log(maxAnsPath);
-
   return ans;
 };
 
-const { createTree } = require('../utils/tree');
-
-let root = createTree([1, null, 2, null, 3, null, 4, null, 5]);
-root = createTree([-10, 9, 20, null, null, 15, 7]);
-
+const { createTree, visualizeTreeArr } = require('../utils/tree');
+const treeArr = [-10, 9, 20, null, null, 15, 7];
+let root = createTree(treeArr.concat());
+visualizeTreeArr(treeArr);
 const getNow = require('performance-now');
 const now = getNow();
-console.log(maxPathSum(root));
-console.log(getNow() - now);
+const path = [];
+console.log('max sum:', maxPathSum(root, path));
+console.log('path', path[0]);
+console.log('time:', getNow() - now);

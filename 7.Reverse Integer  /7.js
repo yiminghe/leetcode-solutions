@@ -19,7 +19,6 @@ var reverse = function (x) {
 
 console.log(reverse(1234));
 
-
 console.log(reverse(-1234));
 
 console.log(reverse(1999999999999));

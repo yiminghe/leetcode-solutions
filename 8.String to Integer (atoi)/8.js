@@ -2,7 +2,7 @@
  * @param {string} s
  * @return {number}
  */
-var myAtoi = function(s) {
+var myAtoi = function (s) {
   s = s.trim();
   let flag = 1;
   let index = 0;
@@ -40,4 +40,3 @@ var myAtoi = function(s) {
 module.exports = myAtoi;
 
 console.log(myAtoi('12344'));
-

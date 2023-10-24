@@ -37,7 +37,7 @@ var hasPathSum = function (root, targetSum, ans = [], path = [], tag = 'root') {
   let root = createTree(treeArr.concat());
   // console.log(JSON.stringify(root,null,2));
   const ans = [];
-  console.log(hasPathSum(root, 22,ans));
+  console.log(hasPathSum(root, 22, ans));
   console.log(ans);
 
   root = visualizeTreeArr(treeArr);
