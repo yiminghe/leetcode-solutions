@@ -7,24 +7,23 @@
  */
 /**
  * @param {TreeNode} root
- * @param {number} sum
+ * @param {number} targetSum
  * @return {boolean}
  */
-var hasPathSum = function (root, sum, path, tag = 'root') {
+var hasPathSum = function (root, targetSum, ans = [], path = [], tag = 'root') {
   if (root) {
-    sum -= root.val;
+    targetSum -= root.val;
     path.push(tag + ': ' + root.val);
     if (!root.left && !root.right) {
-      const ret = sum === 0;
-      if (!ret) {
-        path.pop();
-      } else {
-        console.log(path);
+      const ret = targetSum === 0;
+      if (ret) {
+        ans.push(path.concat());
       }
+      path.pop();
       return ret;
     }
-    const left = hasPathSum(root.left, sum, path, 'l');
-    const right = hasPathSum(root.right, sum, path, 'r');
+    const left = hasPathSum(root.left, targetSum, ans, path, 'l');
+    const right = hasPathSum(root.right, targetSum, ans, path, 'r');
     path.pop();
     return left || right;
   }
@@ -34,11 +33,12 @@ var hasPathSum = function (root, sum, path, tag = 'root') {
 (function () {
   const { createTree, visualizeTreeArr } = require('../utils/tree');
 
-  const treeArr = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1];
+  const treeArr = [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 5];
   let root = createTree(treeArr.concat());
   // console.log(JSON.stringify(root,null,2));
-
-  console.log(hasPathSum(root, 22, []));
+  const ans = [];
+  console.log(hasPathSum(root, 22,ans));
+  console.log(ans);
 
   root = visualizeTreeArr(treeArr);
   // console.log(JSON.stringify(root,null,2));
