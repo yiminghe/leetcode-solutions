@@ -12,6 +12,9 @@
  * @param {TreeNode} root
  * @return {string}
  */
+
+const sentry = 'null';
+
 var serialize = function (root) {
   if (!root) {
     return '[]';
@@ -19,22 +22,57 @@ var serialize = function (root) {
   let queue = [root];
   const ret = [];
   while (queue.length) {
-    let newQueue = [];
-    for (const q of queue) {
-      if (q) {
-        ret.push(q.val);
-        newQueue.push(q.left);
-        newQueue.push(q.right);
-      } else {
-        ret.push('n');
-      }
+    const node = queue.shift();
+    if (node) {
+      ret.push(node.val);
+      queue.push(node.left);
+      queue.push(node.right);
+    } else {
+      ret.push(sentry);
     }
-    queue = newQueue;
   }
-  while (ret[ret.length - 1] === 'n') {
+
+  while (ret[ret.length - 1] === sentry) {
     ret.pop();
   }
   return `[${ret.join(',')}]`;
+};
+
+var deserialize2 = function (data) {
+  const arr = data.slice(1, -1).split(',');
+  if (!arr[0]) {
+    return null;
+  }
+  let index = 0;
+  let root = {
+    val: arr[0],
+    left: null,
+    right: null,
+  };
+  const queue = [];
+  queue.push(root);
+  while (queue.length && index < arr.length) {
+    const node = queue.shift();
+    const left = arr[++index] ?? sentry;
+    if (left !== sentry) {
+      node.left = {
+        val: left,
+        left: null,
+        right: null,
+      };
+      queue.push(node.left);
+    }
+    const right = arr[++index] ?? sentry;
+    if (right !== sentry) {
+      node.right = {
+        val: right,
+        left: null,
+        right: null,
+      };
+      queue.push(node.right);
+    }
+  }
+  return root;
 };
 
 /**
@@ -49,7 +87,7 @@ var deserialize = function (data) {
     return null;
   }
   arr.forEach((element, index) => {
-    if (arr[index] !== 'n') {
+    if (arr[index] !== sentry) {
       arr[index] = {
         val: element,
       };
@@ -95,7 +133,9 @@ let tree = createTree([1, 2, 3, 4, 5]);
 
 let s = serialize(tree);
 
-tree = deserialize(s);
+console.log(s);
+
+tree = deserialize2(s);
 
 s = serialize(tree);
 

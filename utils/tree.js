@@ -127,7 +127,7 @@ function traverse2(root, order) {
 
 const aCharCode = 'a'.charCodeAt(0);
 
-function collecTrie(root, s, ans) {
+function collectTrie(root, s, ans) {
   if (root.isWord) {
     ans.push(s);
   }
@@ -136,7 +136,7 @@ function collecTrie(root, s, ans) {
     const c = children[i];
     if (c) {
       const ms = s + String.fromCharCode(i + aCharCode);
-      collecTrie(c, ms, ans);
+      collectTrie(c, ms, ans);
     }
   }
   return;
@@ -146,7 +146,7 @@ const api = (module.exports = {
   traverse,
   createTree(arr) {
     arr.forEach((element, index) => {
-      if (arr[index]) {
+      if (arr[index] !== null) {
         arr[index] = {
           val: element,
         };
@@ -181,7 +181,7 @@ const api = (module.exports = {
 
   printTrie(root) {
     const ans = [];
-    collecTrie(root, '', ans);
+    collectTrie(root, '', ans);
     console.log(ans);
   },
 
