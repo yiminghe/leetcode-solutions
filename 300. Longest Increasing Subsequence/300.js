@@ -24,34 +24,35 @@ var lengthOfLIS_slow = function (nums) {
   return current;
 };
 
-
 var lengthOfLIS = function (nums) {
-  var len = 1, n = nums.length;
+  var len = 1,
+    n = nums.length;
   if (n == 0) {
-      return 0;
+    return 0;
   }
   var d = new Array(n + 1);
   d[len] = nums[0];
   for (var i = 1; i < n; ++i) {
-      if (nums[i] > d[len]) {
-          d[++len] = nums[i];
-      } else {
-          var l = 1, r = len, pos = 0;
-          while (l <= r) {
-              var mid = (l + r) >> 1;
-              if (d[mid] < nums[i]) {
-                  pos = mid;
-                  l = mid + 1;
-              } else {
-                  r = mid - 1;
-              }
-          }
-          d[pos + 1] = nums[i];
+    if (nums[i] > d[len]) {
+      d[++len] = nums[i];
+    } else {
+      var l = 1,
+        r = len,
+        pos = 0;
+      while (l <= r) {
+        var mid = (l + r) >> 1;
+        if (d[mid] < nums[i]) {
+          pos = mid;
+          l = mid + 1;
+        } else {
+          r = mid - 1;
+        }
       }
+      d[pos + 1] = nums[i];
+    }
   }
   return len;
 };
-
 
 const nums = [10, 9, 2, 5, 3, 7, 101, 18];
 
