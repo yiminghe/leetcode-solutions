@@ -40,3 +40,28 @@ var splitArray = function (nums, m) {
 
   return ans;
 };
+
+var splitArray_dp_slow = function (nums, m) {
+  let n = nums.length;
+  let f = [];
+  for (let i = 0; i <= n; i++) {
+    f[i] = new Array(m + 1);
+    f[i].fill(Number.MAX_SAFE_INTEGER);
+  }
+  let sub = new Array(n + 1);
+  sub[0] = 0;
+  for (let i = 0; i < n; i++) {
+    sub[i + 1] = sub[i] + nums[i];
+  }
+  f[0][0] = 0;
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= Math.min(i, m); j++) {
+      for (let k = 0; k < i; k++) {
+        f[i][j] = Math.min(f[i][j], Math.max(f[k][j - 1], sub[i] - sub[k]));
+      }
+    }
+  }
+  return f[n][m];
+};
+
+console.log(splitArray([7, 2, 5, 10, 8], 2));
