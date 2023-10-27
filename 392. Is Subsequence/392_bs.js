@@ -1,18 +1,18 @@
 /**
- * @param {string} s
- * @param {string} t
+ * @param {string} target
+ * @param {string} source
  * @return {boolean}
  */
-var isSubsequence = function (t, s) {
+var isSubsequence = function (source, target) {
   const index = {};
   let si = 0;
-  let sl = s.length;
+  let sl = target.length;
   for (; si < sl; si++) {
-    index[s[si]] = index[s[si]] || [];
-    index[s[si]].push(si);
+    index[target[si]] = index[target[si]] || [];
+    index[target[si]].push(si);
   }
   let prevIndex = -1;
-  for (let c of t) {
+  for (let c of source) {
     if (index[c]) {
       prevIndex = lowerbound(index[c], prevIndex);
       if (prevIndex === -1) {
