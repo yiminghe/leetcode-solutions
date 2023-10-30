@@ -2,7 +2,7 @@
  * @param {number} N
  * @return {number}
  */
-var fib = function (N) {
+var fib_slow = function (N) {
   let prev1 = 0;
   let prev2 = 1;
   if (N == 0) {
@@ -41,22 +41,7 @@ function multiplyMatrix(a1, a2) {
   a1[1][1] = a11;
   return a1;
 }
-
-function copy(a1, a2) {
-  a1[0][0] = a2[0][0];
-  a1[0][1] = a2[0][1];
-  a1[1][0] = a2[1][0];
-  a1[1][1] = a2[1][1];
-  return a1;
-}
-
-const m = [
-  [1, 1],
-  [1, 0],
-];
-
-function fibMatrix(n) {
-  debugger;
+var fib = function (n) {
   if (n == 0) {
     return 0;
   }
@@ -67,17 +52,17 @@ function fibMatrix(n) {
     [1, 0],
     [0, 1],
   ];
-  let total = [
+  let acc = [
     [1, 1],
     [1, 0],
   ];
-  n--;
+  --n;
   while (n) {
-    if (n % 2) {
-      multiplyMatrix(ret, total);
+    if (n & 1) {
+      multiplyMatrix(ret, acc);
     }
-    n = (n / 2) | 0;
-    multiplyMatrix(total, total);
+    n >>>= 1;
+    multiplyMatrix(acc, acc);
   }
   return ret[0][0];
 }
@@ -85,11 +70,11 @@ function fibMatrix(n) {
 var performanceNow = require('performance-now');
 let n = 70;
 let start = performanceNow();
-console.log(fib(n));
+console.log(fib_slow(n));
 console.log('d:', performanceNow() - start);
 start = performanceNow();
 console.log(fibEigen(n));
 console.log('d:', performanceNow() - start);
 start = performanceNow();
-console.log(fibMatrix(n));
+console.log(fib(n));
 console.log('d:', performanceNow() - start);
