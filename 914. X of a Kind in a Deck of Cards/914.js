@@ -14,11 +14,39 @@ var hasGroupsSizeX = function (deck) {
   return getGroupSize(map) >= 2;
 };
 
-function gcd(h, l) {
+function gcd2(h, l) {
   while (l) {
     [h, l] = [l, h % l];
   }
   return h;
+}
+
+function gcd(h, l) {
+  if (h === l) {
+    return l;
+  }
+  let acc = 0;
+  while (l && h) {
+    const isHOdd = h & 1;
+    const isLOdd = l & 1;
+    if (isHOdd && isLOdd) {
+      if (h < l) {
+        [h, l] = [l, h];
+      }
+      h = h - l;
+      continue;
+    } else if (!isHOdd && !isLOdd) {
+      acc += 1;
+      h >>>= 1;
+      l >>>= 1;
+    } else if (!isHOdd) {
+      h >>>= 1;
+    } else if (!isLOdd) {
+      l >>>= 1;
+    }
+  }
+  const ret = (l || h) << acc;
+  return ret;
 }
 
 function getGroupSize(map) {
@@ -27,7 +55,7 @@ function getGroupSize(map) {
     if (g === -1) {
       g = v;
     } else {
-      g = gcd(g, v);
+      g = g > v ? gcd(g, v) : gcd(v, g);
     }
   });
   return g;
@@ -36,7 +64,6 @@ function getGroupSize(map) {
 const deck = [1, 2, 3, 4, 4, 3, 2, 1];
 
 console.log(hasGroupsSizeX(deck));
-
 /**
  *
  * 3 个城市的人进行分组比赛，
