@@ -109,16 +109,17 @@ function generate24() {
   return ret;
 }
 
-const data = [4, 1, 8, 7];
+const data = [13, 13, 9, 2];
 console.log(judgePoint24(data));
 console.log(judgePoint24_2(data));
-
-const ret = generate24();
-const fs = require('fs');
-const path = require('path');
-console.log(ret.length);
-let str = [];
-for (const r of ret) {
-  str.push(JSON.stringify(r.q)+'\t'+r.a);
+if (1 > 2) {
+  const ret = generate24();
+  const fs = require('fs');
+  const path = require('path');
+  console.log(ret.length);
+  let str = [];
+  for (const r of ret) {
+    str.push(JSON.stringify(r.q) + '\t' + r.a);
+  }
+  fs.writeFileSync(path.join(__dirname, '24.txt'), str.join('\n'));
 }
-fs.writeFileSync(path.join(__dirname, '24.txt'), str.join('\n'));
