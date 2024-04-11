@@ -3,25 +3,27 @@
  * @return {number}
  */
 var trap = function (height) {
-  let left = 0;
-  let right = height.length - 1;
+  let left = 1;
+  let right = height.length - 2;
   let leftMax = 0;
   let rightMax = 0;
   let ret = 0;
-  while (left !== right) {
+  while (left <= right) {
     let lv = height[left];
     let rv = height[right];
-    leftMax = Math.max(lv, leftMax);
-    rightMax = Math.max(rv, rightMax);
-    if (lv > rv) {
-      ret += rightMax - rv;
+    leftMax = Math.max(leftMax, height[left - 1]);
+    rightMax = Math.max(rightMax, height[right + 1]);
+    if (leftMax > rightMax) {
+      if (rightMax > rv)
+        ret += rightMax - rv;
       --right;
     } else {
-      ret += leftMax - lv;
+      if (leftMax > lv)
+        ret += leftMax - lv;
       ++left;
     }
   }
   return ret;
 };
 
-console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
+console.log(trap([4, 2, 0, 3, 2, 5]));
