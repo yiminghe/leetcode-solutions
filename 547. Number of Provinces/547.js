@@ -24,8 +24,8 @@ var findCircleNum = function (isConnected) {
 };
 
 function union(i, j, parents, rank, ret) {
-  const rootI = findParent(i,parents);
-  const rootJ = findParent(j,parents);
+  const rootI = findParent(i, parents);
+  const rootJ = findParent(j, parents);
   if (rootI === rootJ) {
     return ret;
   }
@@ -47,11 +47,46 @@ function findParent(i, parents) {
   if (j === i) {
     return i;
   }
-  parents[i] = findParent(j,parents);
+  parents[i] = findParent(j, parents);
   return parents[i];
 }
 
-console.log(findCircleNum([[1, 1, 0], [1, 1, 0], [0, 0, 1]]))
 
 
-console.log(findCircleNum([[1, 0, 0], [0, 1, 0], [0, 0, 1]]))
+/**
+ * @param {number[][]} isConnected
+ * @return {number}
+ */
+var findCircleNumDfs = function (isConnected) {
+  const l = isConnected.length;
+  const visited = new Array(l);
+
+  function dfs(i){
+    visited[i]=true;
+    for(let j=0;j<l;j++){
+      if(!visited[j]&&isConnected[i][j]){
+        dfs(j);
+      }
+    }
+  }
+
+  let ret=0;
+
+  for(let i=0;i<l;i++){
+    if(!visited[i]){
+      ret++;
+      dfs(i);
+    }
+  }
+
+  return ret;
+};
+
+
+let map=[[1, 1, 0], [1, 1, 0], [0, 0, 1]];
+console.log(findCircleNum(map))
+console.log(findCircleNumDfs(map))
+
+map=[[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+console.log(findCircleNum(map))
+console.log(findCircleNumDfs(map))
