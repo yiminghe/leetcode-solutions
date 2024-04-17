@@ -26,4 +26,29 @@ var trap = function (height) {
   return ret;
 };
 
-console.log(trap([4, 2, 0, 3, 2, 5]));
+//Monotonic Stack
+var trap2 = (heights) => {
+  const stack = [];
+  let ans = 0;
+  for (let i = 0; i < heights.length; i++) {
+    const cur = heights[i];
+    while (stack.length && cur > heights[stack[stack.length - 1]]) {
+      const middle = heights[stack.pop()];
+      if (stack.length) {
+        const leftIndex = stack[stack.length - 1];
+        const left = heights[leftIndex];
+        ans += Math.max(Math.min(cur, left) - middle, 0) * (i - leftIndex - 1);
+      }
+    }
+    stack.push(i);
+  }
+  return ans;
+};
+
+let heights;
+
+heights = [4, 2, 0, 3, 2, 5];
+
+console.log(trap(heights));
+debugger
+console.log(trap2(heights));
